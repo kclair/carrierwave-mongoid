@@ -49,6 +49,7 @@ module CarrierWave
         end
 
         def find_previous_model_for_#{column}
+          return if to_key.first.nil?
           if self.embedded?
             ancestors       = [[ self.metadata.key, self._parent ]].tap { |x| x.unshift([ x.first.last.metadata.key, x.first.last._parent ]) while x.first.last.embedded? }
             first_parent = ancestors.first.last
